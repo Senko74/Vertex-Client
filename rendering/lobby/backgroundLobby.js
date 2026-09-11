@@ -17,8 +17,10 @@ scene.add(light)
 window.addEventListener("resize", () =>
 {
     renderer.setSize(window.innerWidth, window.innerHeight)
-})
 
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+})
 let meshs = []
 let shipMesh
 let stars

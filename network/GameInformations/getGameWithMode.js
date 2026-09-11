@@ -1,16 +1,15 @@
 const WebSockets = require("ws")
+const { buildWsUrl } = require("./buildWsUrl")
 
 async function getGameWithMode(mode)
 {
     const res = await fetch("https://starblast.io/simstatus.json")
     const serverData = await res.json()
     const server = await getBestServer(serverData)
-    console.log("server", server)
     for(serv of serverData)
     {
         if(serv.address === server.ip && serv.systems.length !== 0)
         {
-            console.log("found server")
             for(game of serv.systems)
             {
                 if(game.mode === mode)

@@ -1,6 +1,6 @@
-async function fingGameWithId(gameLink)
+const { buildWsUrl } = require("./buildWsUrl")
+async function fingGameWithLink(gameLink)
 {
-    console.log(gameLink)
     if(gameLink.includes("@"))
     {
         return moddedCustomParty(gameLink)
@@ -21,8 +21,6 @@ function moddedCustomParty(gameLink)
         wsServerUrl = buildWsUrl(serverIp)
         gameId = `${gameLink.split("@")[0]}`
         gameId = gameId.split("#")[1]
-        console.log(wsServerUrl)
-        console.log(typeof(gameId))
 
     }
     return{
@@ -61,4 +59,4 @@ async function vanillaCustomParty(gameLink)
     return null
 }
 
-module.exports = { fingGameWithId }
+module.exports = { fingGameWithLink }

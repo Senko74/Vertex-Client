@@ -6,3 +6,8 @@ export function initGameRenderer()
 {
 
 }
+
+export function onServerMessage(message)
+{
+    
+}
