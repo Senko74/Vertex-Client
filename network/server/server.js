@@ -49,6 +49,7 @@ server.on("connection", async (socket) =>
                         },
                         (message) =>
                         {
+                            console.log(Array.from(message))
                             socket.send(message)
                         }
                     )

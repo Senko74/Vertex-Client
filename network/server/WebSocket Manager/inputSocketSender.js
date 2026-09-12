@@ -38,6 +38,17 @@ class InputSender
     shoot()
     {
         this.socket.send(8192)
+        this.sayWord()
+    }
+
+    sayWord()
+    {
+        this.socket.send(JSON.stringify(
+            {
+                name : "say",
+                data : "aa"
+            }
+        ))
     }
 
     stop_shoot()

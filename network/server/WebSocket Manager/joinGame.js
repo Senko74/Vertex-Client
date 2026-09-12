@@ -12,7 +12,15 @@ function joinGame(info, socket)
                     player_name : "Vertex Client",
                     preferred : info.gameId,
                     spectate : false,
-                    mode : info.mode
+                    mode : info.mode,
+                    ecpKey : "07b59-c621c",
+                    ecp_custom : 
+                    {
+                        badge : "youtube",
+                        finish : "carbon",
+                        hue : 276,
+                        laser : 3
+                    }
                 }
             }
         ))
