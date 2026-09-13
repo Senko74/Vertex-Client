@@ -22,7 +22,6 @@ socket.binaryType = "arraybuffer"
 socket.addEventListener("message", (message) =>
 {
     const array = Array.from(new Uint8Array(message.data))
-    console.log(array)
     let msg
     try
     {

@@ -52,19 +52,20 @@ export function onServerMessage(message)
     if(array[0] === 0)
     {
         const shipData = parsingManager.parsePlayer0(message.data)
+        if(shipData.shipId !== playerShipId)
+        {
+            console.log(shipData)
+        }
         playerStatus(shipData)
     }
     if(array[0] === 67)
     {
-        console.log("677777777")
         playerShipId = array[1]
-        console.log(playerShipId)
     }
 }
 
 async function playerStatus(data)
 {
-    console.log(data)
     let newPlayer = true
     let player
     for(const aPlayer of players)
@@ -87,7 +88,6 @@ async function playerStatus(data)
         if(data.shipId === playerShipId)
         {
             ship.mesh.add(camera)
-            console.log("added in scenegraph")
         }
         player = new Player(data.shipId, ship)
         players.push(player)

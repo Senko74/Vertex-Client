@@ -28,7 +28,6 @@ export class Ship
 
     updateRotation(angle)
     {
-        console.log(angle, -angle)
         this.mesh.rotation.y = -angle + Math.PI*2
     }
 
