@@ -15,13 +15,14 @@ const renderer = new THREE.WebGLRenderer({canvas : document.querySelector("#canv
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 let playerShipId
+let playerShip
 // const orbitControl = new OrbitControls(camera, renderer.domElement)
 const ambientLight = new THREE.AmbientLight(0xfffffff)
 scene.add(ambientLight)
 const grid = new THREE.GridHelper(800,200)
 scene.add(grid)
 
-camera.position.y = 20
+camera.position.y = 70
 camera.rotation.x = - Math.PI/2
 
 window.addEventListener("resize", () =>
@@ -36,6 +37,11 @@ function render()
 {
     window.requestAnimationFrame(render)
     renderer.render(scene, camera)
+    if(playerShip)
+    {
+        camera.position.x = playerShip.mesh.position.x
+        camera.position.z = playerShip.mesh.position.z
+    }
     // orbitControl.update()
 }
 
@@ -87,7 +93,7 @@ async function playerStatus(data)
         await ship.spawn()
         if(data.shipId === playerShipId)
         {
-            ship.mesh.add(camera)
+            playerShip = ship
         }
         player = new Player(data.shipId, ship)
         players.push(player)

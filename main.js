@@ -14,6 +14,9 @@ const lobby = document.querySelector("#lobby")
 const gameCanvas = document.querySelector("#canvasGame")
 
 let actionsValue = 0
+let worldSeed
+let worldSize
+let worldMode
 
 //LOCAL WS SERVER TO EXE NODE JS 
 const socket = new WebSocket("ws://localhost:9000")
@@ -38,6 +41,13 @@ socket.addEventListener("message", (message) =>
         {
             case "start_game":
                 startGame(msg.data)
+                break
+            case "welcome":
+                worldSeed = msg.data.seed
+                worldSize = msg.data.size
+                worldMode = msg.data.mode
+                console.log("world data", { seed: worldSeed, size: worldSize, mode: worldMode })
+                break
         }
     }
 })
