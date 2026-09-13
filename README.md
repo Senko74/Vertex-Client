@@ -2,4 +2,5 @@
 
 A custom client to connect to starblast.io server.
 
-<img width="12892" height="5635" alt="Sans-titre-2026-09-09-2247 excalidraw" src="https://github.com/user-attachments/assets/0c63d8e9-a0f4-476d-ad2b-27a42c86dd42" />
+<img width="12892" height="5635" alt="Sans-titre-2026-09-09-22247 excalidraw" src="https://github.com/user-attachments/assets/125f4f18-4452-4ccd-b1d5-3db984768671" />
+
