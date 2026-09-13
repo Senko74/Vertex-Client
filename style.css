@@ -27,6 +27,15 @@ body {
     z-index: -1;
 }
 
+#canvasGame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 21;
+}
+
 #title {
     grid-area: title;
     margin: 0 0 16px;

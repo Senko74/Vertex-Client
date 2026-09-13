@@ -49,7 +49,10 @@ server.on("connection", async (socket) =>
                         },
                         (message) =>
                         {
-                            console.log(Array.from(message))
+                            // console.log(Array.from(message))
+                            const array = Array.from(message)
+                                console.log(array)
+        
                             socket.send(message)
                         }
                     )
@@ -82,7 +85,6 @@ server.on("connection", async (socket) =>
                         connectionManager.input("stop_shoot")
                     }
                     break
-
             }
         }
     })

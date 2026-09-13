@@ -1,5 +1,5 @@
 
-function joinGame(info, socket)
+function joinGame(info, socket, callback)
 {
     if(socket)
     {
@@ -57,7 +57,17 @@ function joinGame(info, socket)
                                 name : "respawn"
                             }
                         ))
+                        break
+                    case "entered":
+                        console.log("entered")
+                        const buffer = new ArrayBuffer(2)
+                        const view = new DataView(buffer)
+                        view.setUint8(0, 67)
+                        view.setUint8(1, msg.data.shipid)
+                        callback(buffer)
+                        socket.send(0)
                         socket.off("message", onMessage)
+                        break
                 }
             }
         }

@@ -1,5 +1,5 @@
-import { init, changeChipColor } from "./rendering/lobby/backgroundLobby";
-// import { gameInformation } from "./GameInformations/gameInformation.js"
+import { init, changeChipColor, stopRendering } from "./rendering/lobby/backgroundLobby";
+import { initGameRenderer, onServerMessage } from "./rendering/game/gameRender"
 
 const inputs = 
 {
@@ -10,12 +10,19 @@ const inputs =
 const colorInput = document.querySelector("#color")
 const playButton = document.querySelector("#play")
 const gameLink = document.querySelector("#gamelink")
+const lobby = document.querySelector("#lobby")
+const gameCanvas = document.querySelector("#canvasGame")
+
+let actionsValue = 0
 
 //LOCAL WS SERVER TO EXE NODE JS 
-const socket = new WebSocket("http://localhost:9000")
+const socket = new WebSocket("ws://localhost:9000")
+socket.binaryType = "arraybuffer"
 
 socket.addEventListener("message", (message) =>
 {
+    const array = Array.from(new Uint8Array(message.data))
+    console.log(array)
     let msg
     try
     {
@@ -23,6 +30,7 @@ socket.addEventListener("message", (message) =>
     }
     catch(err)
     {
+        onServerMessage(message)
         return
     }
     if(msg.name)
@@ -69,6 +77,8 @@ function getGameInfo()
 
 function startGame(gameInfo)
 {
+    stopRendering()
+    startGameRendering()
     socket.send(JSON.stringify(
         {
             name : "start_game",
@@ -84,14 +94,14 @@ function startGame(gameInfo)
 
 window.addEventListener("keydown", (event) =>
 {
+    if(event.repeat) { return }
     keyDownInputManager(event)
-    console.log(event.key)
 })
 
 window.addEventListener("keyup", (event) =>
 {
+    if(event.repeat) { return }
     keyUpInputManager(event)
-    console.log("keyup :", event.key)
 })
 
 function keyDownInputManager(event)
@@ -100,6 +110,8 @@ function keyDownInputManager(event)
     {
         if(event.key === thrustInput)
         {
+            actionsValue += 4096
+            sendActionsValue()
             if(socket)
             {
                 socket.send(JSON.stringify(
@@ -114,6 +126,8 @@ function keyDownInputManager(event)
     {
         if(event.key === shootInput)
         {
+            actionsValue += 8192
+            sendActionsValue()
             if(socket)
             {
                 socket.send(JSON.stringify(
@@ -132,6 +146,8 @@ function keyUpInputManager(event)
     {
         if(event.key === thrustInput)
         {
+            actionsValue -= 4096
+            sendActionsValue()
             if(socket)
             {
                 socket.send(JSON.stringify(
@@ -146,6 +162,8 @@ function keyUpInputManager(event)
     {
         if(event.key === shootInput)
         {
+            actionsValue -= 8192
+            sendActionsValue()
             if(socket)
             {
                 socket.send(JSON.stringify(
@@ -158,5 +176,16 @@ function keyUpInputManager(event)
     }
 }
 
+function sendActionsValue()
+{
+    console.log(actionsValue)
+}
+
+function startGameRendering()
+{
+    lobby.style.display = "none"
+    gameCanvas.style.display = "block"
+    initGameRenderer()
+}
 
 init()

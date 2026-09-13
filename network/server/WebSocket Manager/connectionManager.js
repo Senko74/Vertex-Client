@@ -35,7 +35,11 @@ class ConnectionManager
                     gameId : this.gameId,
                     mode : this.mode
                 },
-                this.socket
+                this.socket,
+                (message) =>
+                {
+                    this.callback(message)
+                }
             )
         })
 

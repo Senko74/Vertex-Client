@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id = "title">Vertex Client</h1>
-    <canvas id = "canvas"></canvas>
-    <input id = "name" type = "text" placeholder="Enter Your Name">
-    <input id = "gamelink" type = "text" placeholder="Game Link">
-    <input id = "color" type = "color" value = "#FF0000">
-    <button id = "play">Play</button>
-    
+    <div id = "lobby">
+        <h1 id = "title">Vertex Client</h1>
+        <canvas id = "canvas"></canvas>
+        <canvas style = "display : none"></canvas>
+        <input id = "name" type = "text" placeholder="Enter Your Name">
+        <input id = "gamelink" type = "text" placeholder="Game Link">
+        <input id = "color" type = "color" value = "#FF0000">
+        <button id = "play">Play</button>
+    </div>    
+    <canvas id = "canvasGame" style = "display : none"></canvas>
     <script type = module src = "main.js"></script>
 </body>
 </html>

@@ -54,10 +54,12 @@ function buildBackground()
     light.lookAt(shipMesh.position)
 }
 
-const clock = new THREE.Clock()
+let animId
+
+const clock = new THREE.Timer()
 function render()
 {
-    window.requestAnimationFrame(render)
+    animId = window.requestAnimationFrame(render)
     renderer.render(scene, camera)
     const delta = clock.getDelta()
     const rotationSpeed = 0.6 //Seconds
@@ -77,4 +79,9 @@ export function changeChipColor(hue)
     
     }
  
+}
+
+export function stopRendering()
+{
+    cancelAnimationFrame(animId)
 }
